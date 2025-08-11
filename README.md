@@ -6,9 +6,9 @@ This script automates the process of cloning student GitHub repositories from su
 
 Before running this script, ensure you have the following installed on your system:
 
-*   [Git](https://git-scm.com/)
-*   [Node.js and npm](https://nodejs.org/)
-*   A Unix-like shell (e.g., Bash, Zsh)
+- [Git](https://git-scm.com/)
+- [Node.js and npm](https://nodejs.org/)
+- A Unix-like shell (e.g., Bash, Zsh)
 
 ## Setup
 
@@ -36,12 +36,14 @@ The script will then perform the following actions for each `.html` file it find
 1.  **Creates a Directory**: It creates a directory named `student_repos` to store all the cloned repositories.
 
 2.  **Parses HTML Files**: For each `.html` file, it:
-    *   Extracts the student's name from the filename.
-    *   Searches for a GitHub URL within the HTML content.
+
+    - Extracts the student's name from the filename.
+    - Searches for a GitHub URL within the HTML content.
 
 3.  **Clones Repositories**:
-    *   It cleans the extracted URL to get the base repository link (e.g., removing `/tree/main`).
-    *   It clones the repository into a dedicated folder inside `student_repos`, named `student_name_lab_name`.
+
+    - It cleans the extracted URL to get the base repository link (e.g., removing `/tree/main`).
+    - It clones the repository into a dedicated folder inside `student_repos`, named `student_name_lab_name`.
 
 4.  **Installs Dependencies**: After a repository is successfully cloned, the script navigates into the new directory and runs `npm install` to install any Node.js dependencies.
 
