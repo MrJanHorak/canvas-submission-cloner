@@ -1,11 +1,18 @@
 #!/bin/bash
 
 # Directory where the HTML files are located
-SUBMISSIONS_DIR="."
+SUBMISSIONS_DIR="html_submissions"
+mkdir -p "$SUBMISSIONS_DIR"
 
 # Directory to store the cloned repositories
 CLONE_DIR="student_repos"
 mkdir -p "$CLONE_DIR"
+
+# Unzip submissions if submissions.zip exists
+if [ -f "submissions.zip" ]; then
+    echo "Found submissions.zip, unzipping..."
+    unzip -o "submissions.zip" -d "$SUBMISSIONS_DIR"
+fi
 
 # Loop through each HTML file in the submissions directory
 for file in "$SUBMISSIONS_DIR"/*.html; do
