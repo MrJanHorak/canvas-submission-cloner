@@ -1,54 +1,113 @@
 # Student Submission Cloner
 
-This script automates the process of cloning student GitHub repositories from submission files. It is designed to work with submission files coming from Canvas that are HTML pages containing a link to the student's work on Github.
+A friendly automation script that streamlines the process of cloning student GitHub repositories from Canvas submission files. This tool is designed to work with HTML submission files from Canvas that contain links to students' GitHub repositories.
 
-## Prerequisites
+## 🚀 Features
+
+- **Smart Directory Naming**: Automatically creates organized directories based on the lab name extracted from GitHub URLs
+- **Robust Error Handling**: Comprehensive error checking with helpful feedback messages
+- **Duplicate Prevention**: Checks for existing repositories to avoid unnecessary re-cloning
+- **Automatic Cleanup**: Removes temporary files after processing to keep your workspace tidy
+- **Progress Tracking**: Clear, informative output showing the processing status for each student
+
+## 📋 Prerequisites
 
 Before running this script, ensure you have the following installed on your system:
 
-- [Git](https://git-scm.com/)
-- [Node.js and npm](https://nodejs.org/)
-- A Unix-like shell (e.g., Bash, Zsh)
+- [Git](https://git-scm.com/) - For cloning repositories
+- [Node.js and npm](https://nodejs.org/) - For installing project dependencies
+- A Unix-like shell (Bash, Zsh, etc.) - The script is designed for Unix-based systems
 
-## Setup
+## 🛠️ Setup
 
-1.  **Place Submissions Zip**: Place the `submissions.zip` file, containing all the student submission HTML files, in the same directory as the `clone_submissions.sh` script.
+1. **Place Your Submissions**: Put the `submissions.zip` file (downloaded from Canvas) in the same directory as the `clone_submissions.sh` script.
 
-2.  **File Naming Convention**: The script expects the HTML files inside the zip to be named in a way that the student's name can be extracted from the beginning of the filename. The format should be `firstname_lastname_...`.
+2. **File Naming Convention**: The script expects HTML files to follow Canvas's naming convention where student names can be extracted from the filename (typically `firstname_lastname_...`).
 
-3.  **Make Script Executable**: You may need to make the script executable by running the following command in your terminal:
-    ```bash
-    chmod +x clone_submissions.sh
-    ```
+3. **Make Script Executable**: Ensure the script has execute permissions:
+   ```bash
+   chmod +x clone_submissions.sh
+   ```
 
-## Usage
+## 🎯 Usage
 
-Once the setup is complete, you can run the script from your terminal:
+Simply run the script from your terminal:
 
 ```bash
 ./clone_submissions.sh
 ```
 
-The script will then perform the following actions for each `.html` file it finds.
+**That's it!** The script will handle everything automatically. Sit back and watch as it processes each submission.
 
-## What the Script Does
+## 🔧 How It Works
 
-1.  **Creates Directories**: It creates two directories:
-    *   `html_submissions`: to store the unzipped HTML files.
-    *   `student_repos`: to store all the cloned repositories.
+The script follows a smart, step-by-step process:
 
-2.  **Unzips Submissions**: If a `submissions.zip` file is found, it unzips the contents into the `html_submissions` directory.
+### 1. **Intelligent Setup**
 
-3.  **Parses HTML Files**: For each `.html` file in `html_submissions`, it:
+- Creates a temporary `html_submissions` directory for processing
+- Automatically unzips `submissions.zip` if present, or works with existing HTML files
+- Determines the lab name by analyzing the first GitHub URL found
 
-    *   Extracts the student's name from the filename.
-    *   Searches for a GitHub URL within the HTML content.
+### 2. **Dynamic Directory Creation**
 
-4.  **Clones Repositories**:
+- Creates a main directory named `cloned_repos_[lab-name]` (e.g., `cloned_repos_ejs-lab`)
+- This keeps different labs organized and prevents mixing assignments
 
-    *   It cleans the extracted URL to get the base repository link (e.g., removing `/tree/main`).
-    *   It clones the repository into a dedicated folder inside `student_repos`, named `student_name_lab_name`.
+### 3. **Smart Processing**
 
-5.  **Installs Dependencies**: After a repository is successfully cloned, the script navigates into the new directory and runs `npm install` to install any Node.js dependencies.
+For each student submission, the script:
 
-6.  **Outputs Progress**: The script will print its progress to the terminal, indicating which student's submission is being processed, whether the cloning was successful, and when `npm install` is complete. If a GitHub URL cannot be found in a file, it will skip that file and notify you.
+- Extracts the student's name from the filename
+- Finds and validates the GitHub URL in the HTML content
+- Cleans the URL (removes `/tree/main` suffixes)
+- Creates a unique directory: `[student-name]_[lab-name]`
+
+### 4. **Repository Management**
+
+- Clones each repository into its dedicated directory
+- Skips repositories that already exist (prevents duplicate work)
+- Automatically runs `npm install` to set up dependencies
+- Provides clear success/failure feedback for each operation
+
+### 5. **Cleanup**
+
+- Removes the temporary `html_submissions` directory
+- Leaves you with a clean, organized workspace
+
+## 📁 Output Structure
+
+After running the script, you'll have a well-organized directory structure:
+
+```
+cloned_repos_[lab-name]/
+├── alice_smith_lab-name/
+│   ├── [student's project files]
+│   └── node_modules/
+├── bob_jones_lab-name/
+│   ├── [student's project files]
+│   └── node_modules/
+└── ...
+```
+
+## 💡 Helpful Tips
+
+- **First Run**: The script automatically detects the lab name from the first valid GitHub URL it finds
+- **Resume Capability**: If the script is interrupted, you can run it again - it won't re-clone existing repositories
+- **Error Handling**: The script continues processing other submissions even if one fails
+- **Progress Monitoring**: Watch the terminal output to see real-time progress and any issues
+
+## 🐛 Troubleshooting
+
+If you encounter issues:
+
+- **No GitHub URLs found**: Check that your HTML files contain properly formatted GitHub links
+- **Permission errors**: Ensure you have write permissions in the current directory
+- **Git clone failures**: Verify the GitHub URLs are accessible and public
+- **npm install issues**: Some student projects may have dependency problems - these are logged individually
+
+## Admisssions
+
+This Readme file was automatically generated, everything expect this line. Claude Sonnet 4 in Agent mode summarized my script in a friendly fairly easy to understanding manner, however definitely left that typical AI-tone. But hey, its a readme and AI is really good at making README files. 
+
+The script is a mix of my writing it, playing around and then when I liked what it was doing fine tuning some elements in Gemini. Have fun with it, I hope it is useful and will help speed up your grading process! 
