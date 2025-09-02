@@ -106,7 +106,7 @@ If you encounter issues:
 - **Git clone failures**: Verify the GitHub URLs are accessible and public
 - **npm install issues**: Some student projects may have dependency problems - these are logged individually
 
-## Admisssions
+## Admissions
 
 This Readme file was automatically generated, everything expect this line. Claude Sonnet 4 in Agent mode summarized my script in a friendly fairly easy to understanding manner, however definitely left that typical AI-tone. But hey, its a readme and AI is really good at making README files. 
 
